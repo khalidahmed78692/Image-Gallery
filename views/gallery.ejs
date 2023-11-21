@@ -1,0 +1,31 @@
+<%- include('partials/header') %>
+<div>
+  <div class="jumbotron centered">
+    <div class="container">
+      <h1>Upload Image</h1>
+      <form action="/upload" method="post" enctype="multipart/form-data">
+        <label for="image">Choose an image:</label>
+        <input type="file" name="image" id="imageInput" accept="image/*" />
+        <button type="submit">Upload</button>
+      </form>
+
+      <h1>Image Gallery</h1>
+      <% if (images && images.length > 0) { %>
+      <div class="image-gallery">
+        <% images.forEach((image) => { %>
+        <img
+          class="img-rounded"
+          src="data:<%= image.images.contentType %>;base64,<%= image.images.data.toString('base64') %>"
+          alt="stored images"
+          height="200px"
+          widht="200px"
+        />
+        <% }); %>
+      </div>
+      <% } else { %>
+      <p>No images available in the gallery.</p>
+      <% } %>
+    </div>
+  </div>
+</div>
+<%- include('partials/footer') %>
